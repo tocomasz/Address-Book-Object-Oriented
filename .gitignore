@@ -1,0 +1,6 @@
+.vs/
+*.sln
+stdafx.*
+targetver.*
+*.vcxproj
+*.filters
