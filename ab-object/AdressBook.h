@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <string>
+#include <Windows.h>
 #include "User.h"
 #include <vector>
 
@@ -11,9 +13,16 @@ class AdressBook
 	int idOfLastContact;
 	int idOfDeletedUser;
 
+	vector <User> users;
+
+	User provideNewUserLoginCredentials();
+	int newUserId();
+	bool isLoginTaken(string);
+
 
 public:
-	void registerUser(User);
+	void registerUser();
+	void printAllUsers();
 	AdressBook();
 	~AdressBook();
 };
