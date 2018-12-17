@@ -11,13 +11,13 @@ class User
 public:
 	User();
 
-	int getUserId();
-	string getUserLogin();
-	string getUserPassword();
+	int getId();
+	string getLogin();
+	string getPassword();
 
-	void setUserId(int);
-	void setUserLogin(string);
-	void setUserPassword(string);
+	void setId(int);
+	void setLogin(string);
+	void setPassword(string);
 
 	~User();
 };
