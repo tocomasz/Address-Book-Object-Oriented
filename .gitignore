@@ -1,6 +1,9 @@
 .vs/
+*Debug/
 *.sln
 stdafx.*
 targetver.*
 *.vcxproj
 *.filters
+*.txt
+*.uxf
