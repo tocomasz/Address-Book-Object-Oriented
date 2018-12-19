@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include <string>
+#include <vector>
 #include "User.h"
 #include "HelperClass.h"
 using namespace std;
@@ -12,10 +13,13 @@ class UserFile
 
 	bool isFileEmpty();
 	string addSeparatingLinesToUserData(User);
+	User divideLineWithSeparatorsIntoUserData(string);
 
 public:
 	UserFile();
 	void saveUserToFile(User);
+	vector <User> loadUsersFromFile();;
+
 	~UserFile();
 };
 

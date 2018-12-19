@@ -12,6 +12,7 @@ class AddressBook
 public:
 	AddressBook();
 	void registerUser();
+	void printAllUsers();
 	~AddressBook();
 };
 

@@ -24,6 +24,7 @@ public:
 
 
 	void registerUser();
+	void printAllUsers();
 	int logUserIn();
 
 	~UserManager();

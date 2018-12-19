@@ -4,6 +4,7 @@
 
 UserManager::UserManager()
 {
+	users = userFile.loadUsersFromFile();
 }
 
 
@@ -25,6 +26,15 @@ bool UserManager::isLoginTaken(string login)
 		}
 	}
 	return false;
+}
+void UserManager::printAllUsers()
+{
+	for (vector <User>::iterator itr = users.begin(), end = users.end(); itr != end; itr++)
+	{
+		cout << itr->getId() << endl;
+		cout << itr->getLogin() << endl;
+		cout << itr->getPassword() << endl;
+	}
 }
 
 
