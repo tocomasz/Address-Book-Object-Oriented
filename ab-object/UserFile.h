@@ -8,17 +8,19 @@ using namespace std;
 
 class UserFile
 {
-	string usersFileName;
-	fstream textFile;
+	const string usersFileName;
+
 
 	bool isFileEmpty();
 	string addSeparatingLinesToUserData(User);
 	User divideLineWithSeparatorsIntoUserData(string);
 
+
 public:
-	UserFile();
+	UserFile(string USERFILENAME) : usersFileName(USERFILENAME) {};
 	void saveUserToFile(User);
 	vector <User> loadUsersFromFile();;
+	void updateUserInFile(User);
 
 	~UserFile();
 };

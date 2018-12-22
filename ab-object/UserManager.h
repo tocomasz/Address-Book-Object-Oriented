@@ -9,7 +9,7 @@ using namespace std;
 
 class UserManager
 {
-	int loggedUserId;
+
 	vector <User> users;
 	UserFile userFile;
 
@@ -19,13 +19,17 @@ class UserManager
 
 
 
+
 public:
-	UserManager();
+	UserManager() ;
 
 
 	void registerUser();
 	void printAllUsers();
 	int logUserIn();
+	void changeUserPassword(int);
+	int logUserOut();
+
 
 	~UserManager();
 };
