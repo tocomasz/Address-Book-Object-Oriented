@@ -9,9 +9,6 @@ using namespace std;
 class UserFile
 {
 	const string usersFileName;
-
-
-	bool isFileEmpty();
 	string addSeparatingLinesToUserData(User);
 	User divideLineWithSeparatorsIntoUserData(string);
 

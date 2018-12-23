@@ -4,13 +4,14 @@ using namespace std;
 
 class Contact
 {
-	int id;
+	int id, userId;
 	string firstName, lastName, telephoneNumber, email, address;
 public:
 	Contact();
 
 
 	int getId();
+	int getUserId();
 	string getFirstName();
 	string getLastName();
 	string getTelephoneNumber();
@@ -18,6 +19,7 @@ public:
 	string getAddress();
 
 	void setId(int);
+	void setUserId(int);
 	void setFirstName(string);
 	void setLastName(string);
 	void setTelephoneNumber(string);

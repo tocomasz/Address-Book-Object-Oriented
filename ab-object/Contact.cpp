@@ -11,6 +11,10 @@ int Contact::getId()
 {
 	return id;
 }
+int Contact::getUserId()
+{
+	return userId;
+}
 string Contact::getFirstName()
 {
 	return firstName;
@@ -36,6 +40,11 @@ void Contact::setId(int newId)
 {
 	if (newId >= 0)
 		id = newId;
+}
+void Contact::setUserId(int newId)
+{
+	if (newId >= 0)
+		userId = newId;
 }
 void Contact::setFirstName(string newFirstName)
 {

@@ -58,17 +58,6 @@ User UserFile::divideLineWithSeparatorsIntoUserData(string lineWithSeparators)
 }
 
 
-bool UserFile::isFileEmpty()
-{
-	fstream textFile;
-	textFile.open(usersFileName.c_str(), ios::in);
-	textFile.seekg(0, ios::end);
-	if ((int)textFile.tellg() == 0)
-		return true;
-	else
-		return false;
-}
-
 string UserFile::addSeparatingLinesToUserData(User user)
 {
 	string line = "";
@@ -90,8 +79,8 @@ void UserFile::saveUserToFile(User user)
 	if (textFile.good() == true)
 	{
 		line = addSeparatingLinesToUserData(user);
-
-		if (isFileEmpty() == true)
+		
+		if (HelperClass::isFileEmpty(usersFileName) == true)
 		{
 			textFile << line;
 		}

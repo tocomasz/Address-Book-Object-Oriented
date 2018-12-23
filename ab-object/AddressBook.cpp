@@ -4,6 +4,7 @@
 AddressBook::AddressBook()
 {
 	loggedUserId = 0;
+	lastContactId = 0;
 }
 
 void AddressBook::registerUser()
@@ -30,7 +31,20 @@ void AddressBook::logUserOut()
 	loggedUserId = userManager.logUserOut();
 }
 
+void AddressBook::addContact()
+{
+	lastContactId = contactManager.addNewContact(loggedUserId, lastContactId);
+}
 
+void AddressBook::loadContacts()
+{
+	contactManager.loadLoggedUserContacts(loggedUserId, lastContactId);
+}
+
+void AddressBook::printAllContacts()
+{
+	contactManager.printAllContacts();
+}
 
 AddressBook::~AddressBook()
 {

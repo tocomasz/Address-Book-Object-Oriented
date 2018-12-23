@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "UserManager.h"
+#include "ContactManager.h"
 
 
 using namespace std;
@@ -9,7 +10,9 @@ using namespace std;
 class AddressBook
 {
 	UserManager userManager;
+	ContactManager contactManager;
 	int loggedUserId;
+	int lastContactId;
 public:
 	AddressBook();
 	void registerUser();
@@ -17,6 +20,9 @@ public:
 	void logUserIn();
 	void changeUserPassword();
 	void logUserOut();
+	void addContact();
+	void loadContacts();
+	void printAllContacts();
 	~AddressBook();
 };
 
