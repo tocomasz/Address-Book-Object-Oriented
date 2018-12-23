@@ -16,14 +16,10 @@ class UserManager
 	int newUserId();
 	bool isLoginTaken(string);
 	User provideNewUserLoginCredentials();
-
-
-
-
+	
 public:
 	UserManager() ;
-
-
+	
 	void registerUser();
 	void printAllUsers();
 	int logUserIn();
