@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "AddressBook.h"
 
 AddressBook::AddressBook()
