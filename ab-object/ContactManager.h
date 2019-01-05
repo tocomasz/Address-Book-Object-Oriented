@@ -13,7 +13,7 @@ class ContactManager
 	ContactFile contactFile;
 
 public:
-	ContactManager();
+	ContactManager(string);
 	int addNewContact(int, int);
 	Contact inputNewContactData(int, int);
 	void loadLoggedUserContacts(int, int&);

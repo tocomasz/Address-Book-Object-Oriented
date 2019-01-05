@@ -18,7 +18,7 @@ class UserManager
 	User provideNewUserLoginCredentials();
 	
 public:
-	UserManager() ;
+	UserManager(string) ;
 	
 	void registerUser();
 	void printAllUsers();

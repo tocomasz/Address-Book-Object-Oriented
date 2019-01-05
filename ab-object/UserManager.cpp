@@ -2,7 +2,7 @@
 #include "UserManager.h"
 
 
-UserManager::UserManager() : userFile("Uzytkownicy.txt")
+UserManager::UserManager(string USERSFILENAME) : userFile(USERSFILENAME)
 {
 	users = userFile.loadUsersFromFile();
 }

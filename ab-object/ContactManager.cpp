@@ -3,7 +3,7 @@
 
 
 
-ContactManager::ContactManager() : contactFile("Adresaci.txt")
+ContactManager::ContactManager(string CONTACTSFILENAME) : contactFile(CONTACTSFILENAME)
 {
 
 }

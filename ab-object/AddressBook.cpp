@@ -1,7 +1,8 @@
 
 #include "AddressBook.h"
 
-AddressBook::AddressBook()
+AddressBook::AddressBook(string USERSFILENAME, string CONTACTSFILENAME)
+	: userManager(USERSFILENAME), contactManager(CONTACTSFILENAME)
 {
 	loggedUserId = 0;
 	lastContactId = 0;
