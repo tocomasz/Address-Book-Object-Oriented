@@ -9,13 +9,10 @@ using namespace std;
 
 class AddressBook
 {
-
-	int loggedUserId;
 	int lastContactId;
-	const string usersFileName;
-	const string contactsFileName;
+	const string CONTACTS_FILE_NAME;
 	UserManager userManager;
-	ContactManager contactManager;
+	ContactManager *contactManager;
 public:
 	AddressBook(string, string);
 	void registerUser();

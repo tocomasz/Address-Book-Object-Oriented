@@ -11,12 +11,13 @@ class ContactManager
 {
 	vector <Contact> contacts;
 	ContactFile contactFile;
+	int loggedUserId;
 
 public:
-	ContactManager(string);
-	int addNewContact(int, int);
-	Contact inputNewContactData(int, int);
-	void loadLoggedUserContacts(int, int&);
+	ContactManager(string, int);
+	int addNewContact(int);
+	Contact inputNewContactData(int);
+	void loadLoggedUserContacts(int&);
 	void printAllContacts();
 	~ContactManager();
 };
