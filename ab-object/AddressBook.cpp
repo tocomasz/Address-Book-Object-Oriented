@@ -1,10 +1,10 @@
 
 #include "AddressBook.h"
 
-AddressBook::AddressBook()
+AddressBook::AddressBook(string USERSFILENAME, string CONTACTSFILENAME)
+	: userManager(USERSFILENAME), CONTACTS_FILE_NAME(CONTACTSFILENAME)
 {
-	loggedUserId = 0;
-	lastContactId = 0;
+	contactManager = NULL;
 }
 
 void AddressBook::registerUser()
@@ -19,33 +19,35 @@ void AddressBook::printAllUsers()
 
 void AddressBook::logUserIn()
 {
-	loggedUserId = userManager.logUserIn();
+	userManager.logUserIn();
+	if (userManager.isUserLoggedIn())
+	{
+		contactManager = new ContactManager(CONTACTS_FILE_NAME, userManager.getLoggedUserId());
+	}
 }
 void AddressBook::changeUserPassword()
 {
-	userManager.changeUserPassword(loggedUserId);
+	userManager.changeUserPassword();
 }
 
 void AddressBook::logUserOut()
 {
-	loggedUserId = userManager.logUserOut();
+	userManager.logUserOut();
 }
 
 void AddressBook::addContact()
 {
-	lastContactId = contactManager.addNewContact(loggedUserId, lastContactId);
+	contactManager->addNewContact();
 }
 
-void AddressBook::loadContacts()
-{
-	contactManager.loadLoggedUserContacts(loggedUserId, lastContactId);
-}
 
 void AddressBook::printAllContacts()
 {
-	contactManager.printAllContacts();
+	contactManager->printAllContacts();
 }
 
 AddressBook::~AddressBook()
 {
+	delete contactManager;
+	contactManager = NULL;
 }

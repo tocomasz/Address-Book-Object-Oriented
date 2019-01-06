@@ -9,12 +9,12 @@ using namespace std;
 
 class AddressBook
 {
+	//int lastContactId;
+	const string CONTACTS_FILE_NAME;
 	UserManager userManager;
-	ContactManager contactManager;
-	int loggedUserId;
-	int lastContactId;
+	ContactManager *contactManager;
 public:
-	AddressBook();
+	AddressBook(string, string);
 	void registerUser();
 	void printAllUsers();
 	void logUserIn();

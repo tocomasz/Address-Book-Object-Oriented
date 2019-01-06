@@ -2,9 +2,10 @@
 #include "UserManager.h"
 
 
-UserManager::UserManager() : userFile("Uzytkownicy.txt")
+UserManager::UserManager(string USERSFILENAME) : userFile(USERSFILENAME)
 {
 	users = userFile.loadUsersFromFile();
+	loggedUserId = 0;
 }
 
 
@@ -69,7 +70,7 @@ void UserManager::registerUser()
 	cout << endl << "Konto zalozono pomyslnie" << endl << endl;
 	system("pause");
 }
-int UserManager::logUserIn()
+void UserManager::logUserIn()
 {
 	string login = "", password = "";
 
@@ -89,22 +90,27 @@ int UserManager::logUserIn()
 				if (itr->getPassword() == password)
 				{
 					cout << endl << "Zalogowales sie." << endl << endl;
+					loggedUserId = itr->getId();
 					system("pause");
-					return itr->getId();
+					return;
+
 				}
 			}
 			cout << "Wprowadzono 3 razy bledne haslo." << endl;
+			loggedUserId = 0;
 			system("pause");
-			return 0;
+			return;
+
 		}
 		itr++;
 	}
 	cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
+	loggedUserId = 0;
 	system("pause");
-	return 0;
+
 }
 
-void UserManager::changeUserPassword(int loggedUserId)
+void UserManager::changeUserPassword()
 {
 	if (loggedUserId == 0)
 		return;
@@ -125,9 +131,22 @@ void UserManager::changeUserPassword(int loggedUserId)
 
 }
 
-int UserManager::logUserOut()
+void UserManager::logUserOut()
 {
-	return 0;
+	loggedUserId = 0;
+}
+
+int UserManager::getLoggedUserId()
+{
+	return loggedUserId;
+}
+
+bool UserManager::isUserLoggedIn()
+{
+	if (loggedUserId > 0)
+		return true;
+	else
+		return false;
 }
 
 

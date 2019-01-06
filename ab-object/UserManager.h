@@ -12,19 +12,23 @@ class UserManager
 
 	vector <User> users;
 	UserFile userFile;
+	int loggedUserId;
 
+	
 	int newUserId();
 	bool isLoginTaken(string);
 	User provideNewUserLoginCredentials();
 	
 public:
-	UserManager() ;
+	UserManager(string) ;
 	
 	void registerUser();
 	void printAllUsers();
-	int logUserIn();
-	void changeUserPassword(int);
-	int logUserOut();
+	void logUserIn();
+	void changeUserPassword();
+	void logUserOut();
+	int getLoggedUserId();
+	bool isUserLoggedIn();
 
 
 	~UserManager();
