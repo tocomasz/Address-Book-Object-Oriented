@@ -1,11 +1,10 @@
 
 #include "AddressBook.h"
 
-AddressBook::AddressBook(string usersFileName, string contactsFileName)
-	: userManager(usersFileName), CONTACTS_FILE_NAME(contactsFileName)
+AddressBook::AddressBook(string USERSFILENAME, string CONTACTSFILENAME)
+	: userManager(USERSFILENAME), CONTACTS_FILE_NAME(CONTACTSFILENAME)
 {
 	contactManager = NULL;
-	lastContactId = 0;
 }
 
 void AddressBook::registerUser()
@@ -38,13 +37,9 @@ void AddressBook::logUserOut()
 
 void AddressBook::addContact()
 {
-	lastContactId = contactManager->addNewContact(lastContactId);
+	contactManager->addNewContact();
 }
 
-void AddressBook::loadContacts()
-{
-	contactManager->loadLoggedUserContacts(lastContactId);
-}
 
 void AddressBook::printAllContacts()
 {

@@ -6,24 +6,23 @@
 ContactManager::ContactManager(string CONTACTSFILENAME, int LOGGEDUSERID)
 	: contactFile(CONTACTSFILENAME), loggedUserId(LOGGEDUSERID)
 {
-
+	lastContactId = 0;
+	contacts = contactFile.loadLoggedUserContactsFromFile(loggedUserId, lastContactId);
 }
 
-int ContactManager::addNewContact(int lastContactId)
+void ContactManager::addNewContact()
 {
 	Contact contact;
 
 	system("cls");
 	cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
-	contact = inputNewContactData(lastContactId);
+	contact = inputNewContactData();
 
 	contacts.push_back(contact);
 	contactFile.addContactToFile(contact);
-
-	return ++lastContactId;
 }
 
-Contact ContactManager::inputNewContactData(int lastContactId)
+Contact ContactManager::inputNewContactData()
 {
 	Contact contact;
 
@@ -50,12 +49,6 @@ Contact ContactManager::inputNewContactData(int lastContactId)
 	contact.setAddress(HelperClass::loadLine());
 
 	return contact;
-}
-
-void ContactManager::loadLoggedUserContacts(int &lastContactId)
-{
-	contacts = contactFile.loadLoggedUserContactsFromFile(loggedUserId, lastContactId );
-	
 }
 
 

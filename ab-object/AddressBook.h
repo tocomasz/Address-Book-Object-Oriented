@@ -9,7 +9,7 @@ using namespace std;
 
 class AddressBook
 {
-	int lastContactId;
+	//int lastContactId;
 	const string CONTACTS_FILE_NAME;
 	UserManager userManager;
 	ContactManager *contactManager;
