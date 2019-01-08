@@ -32,18 +32,33 @@ void AddressBook::changeUserPassword()
 
 void AddressBook::logUserOut()
 {
+
 	userManager.logUserOut();
 }
 
 void AddressBook::addContact()
 {
-	contactManager->addNewContact();
+	if (userManager.isUserLoggedIn())
+		contactManager->addNewContact();
 }
 
 
 void AddressBook::printAllContacts()
 {
-	contactManager->printAllContacts();
+	if (userManager.isUserLoggedIn())
+		contactManager->printAllContacts();
+}
+
+void AddressBook::findContactsByFirstName()
+{
+	if (userManager.isUserLoggedIn())
+		contactManager->findContactsByFirstName();
+}
+
+void AddressBook::findContactsByLastName()
+{
+	if (userManager.isUserLoggedIn())
+		contactManager->findContactsByLastName();
 }
 
 AddressBook::~AddressBook()

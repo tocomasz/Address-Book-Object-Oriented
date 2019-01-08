@@ -32,7 +32,7 @@ string HelperClass::loadLine()
 	return input;
 }
 
-string HelperClass::convertStringToSenteceCase(string input)
+string HelperClass::convertStringToSentenceCase(string input)
 {
 	if (!input.empty())
 	{
