@@ -76,6 +76,33 @@ vector<Contact> ContactFile::loadLoggedUserContactsFromFile(int loggedUserId, in
 	return contacts;
 }
 
+void ContactFile::updateContactInFile(Contact contact)
+{
+	string contactNewData = separateContactDataWithLineSeparators(contact);
+	fstream textFile, temp;
+	textFile.open(contactsFileName.c_str(), ios::in);
+	temp.open("temporaryContactsFile.txt", ios::out);
+	if (textFile.good() && temp.good())
+	{
+		string loadedLine = "";
+		while (getline(textFile, loadedLine))
+		{
+			if (loadedLine[0] - '0' == contact.getId())
+			{
+				temp << contactNewData << endl;
+				continue;
+			}
+			temp << loadedLine << endl;
+		}
+	}
+	textFile.close();
+	textFile.clear();
+	temp.close();
+	temp.clear();
+	remove(contactsFileName.c_str());
+	rename("temporaryContactsFile.txt", contactsFileName.c_str());
+}
+
 int ContactFile::getUserIdFromString(string line)
 {
 	int userIdPosition = line.find_first_of('|') + 1;

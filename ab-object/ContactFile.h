@@ -17,6 +17,7 @@ public:
 	ContactFile(string CONTACTFILENAME) : contactsFileName(CONTACTFILENAME) {};
 	void addContactToFile(Contact);
 	vector <Contact> loadLoggedUserContactsFromFile(int, int&);
+	void updateContactInFile(Contact);
 	~ContactFile();
 };
 

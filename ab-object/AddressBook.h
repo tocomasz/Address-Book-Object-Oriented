@@ -23,6 +23,7 @@ public:
 	void printAllContacts();
 	void findContactsByFirstName();
 	void findContactsByLastName();
+	void editContact();
 	~AddressBook();
 };
 

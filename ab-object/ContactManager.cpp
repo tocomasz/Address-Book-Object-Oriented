@@ -30,6 +30,34 @@ void ContactManager::printNumberOfContactsFound(int contactsCount)
 		cout << endl << "Ilosc adresatow w ksiazce adresowej wynosi: " << contactsCount << endl << endl;
 }
 
+int ContactManager::chooseContactToEdit()
+{
+	int chosenContact = 0;
+	cout << "Podaj numer ID Adresata: ";
+	chosenContact = HelperClass::loadInteger();
+	return chosenContact;
+}
+
+char ContactManager::contactEditMenu()
+{
+	char choice;
+
+	cout << endl << "   >>> MENU  EDYCJA <<<" << endl;
+	cout << "---------------------------" << endl;
+	cout << "Ktore dane zaktualizowac: " << endl;
+	cout << "1 - Imie" << endl;
+	cout << "2 - Nazwisko" << endl;
+	cout << "3 - Numer telefonu" << endl;
+	cout << "4 - Email" << endl;
+	cout << "5 - Adres" << endl;
+	cout << "6 - Powrot " << endl;
+	cout << endl << "Twoj wybor: ";
+	choice = HelperClass::loadCharacter();
+
+	return choice;
+}
+
+
 void ContactManager::addNewContact()
 {
 	Contact contact;
@@ -74,25 +102,24 @@ Contact ContactManager::inputNewContactData()
 
 void ContactManager::printAllContacts()
 {
-	for (vector <Contact>::iterator itr = contacts.begin(), end = contacts.end(); itr != end; itr++)
+	
+	system("cls");
+	if (!contacts.empty())
 	{
-		system("cls");
-		if (!contacts.empty())
+		cout << "             >>> ADRESACI <<<" << endl;
+		cout << "-----------------------------------------------" << endl;
+		for (vector <Contact> ::iterator itr = contacts.begin(), end = contacts.end(); itr != end; itr++)
 		{
-			cout << "             >>> ADRESACI <<<" << endl;
-			cout << "-----------------------------------------------" << endl;
-			for (vector <Contact> ::iterator itr = contacts.begin(), end = contacts.end(); itr != end; itr++)
-			{
-				printContact(*itr);
-			}
-			cout << endl;
+			printContact(*itr);
 		}
-		else
-		{
-			cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
-		}
-		system("pause");
+		cout << endl;
 	}
+	else
+	{
+		cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
+	}
+	system("pause");
+
 }
 
 void ContactManager::findContactsByFirstName()
@@ -156,6 +183,70 @@ void ContactManager::findContactsByLastName()
 		cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
 	}
 	cout << endl;
+	system("pause");
+}
+
+void ContactManager::editContact()
+{
+	system("cls");
+	Contact contact;
+	int contactId = 0;
+	int contacLine = 0;
+	string contactData = "";
+
+	cout << ">>> EDYCJA WYBRANEGO ADRESATA <<<" << endl << endl;
+	contactId = chooseContactToEdit();
+
+	char choice;
+	bool isContact = false;
+
+	for (vector <Contact>::iterator itr = contacts.begin(), end = contacts.end(); itr != end; itr++)
+	{
+		if (itr->getId() == contactId)
+		{
+			isContact = true;
+			choice = contactEditMenu();
+
+			switch (choice)
+			{
+			case '1':
+				cout << "Podaj nowe imie: ";
+				itr->setFirstName(HelperClass::convertStringToSentenceCase(HelperClass::loadLine()));
+				contactFile.updateContactInFile(*itr);
+				break;
+			case '2':
+				cout << "Podaj nowe nazwisko: ";
+				itr->setLastName(HelperClass::convertStringToSentenceCase(HelperClass::loadLine()));
+				contactFile.updateContactInFile(*itr);
+				break;
+			case '3':
+				cout << "Podaj nowy numer telefonu: ";
+				itr->setTelephoneNumber(HelperClass::loadLine());
+				contactFile.updateContactInFile(*itr);
+				break;
+			case '4':
+				cout << "Podaj nowy email: ";
+				itr->setEmail(HelperClass::loadLine());
+				contactFile.updateContactInFile(*itr);
+				break;
+			case '5':
+				cout << "Podaj nowy adres zamieszkania: ";
+				itr->setAddress(HelperClass::loadLine());
+				contactFile.updateContactInFile(*itr);
+				break;
+			case '6':
+				cout << endl << "Powrot do menu uzytkownika" << endl << endl;
+				break;
+			default:
+				cout << endl << "Nie ma takiej opcji w menu! Powrot do menu uzytkownika." << endl << endl;
+				break;
+			}
+		}
+	}
+	if (isContact == false)
+	{
+		cout << endl << "Nie ma takiego adresata." << endl << endl;
+	}
 	system("pause");
 }
 

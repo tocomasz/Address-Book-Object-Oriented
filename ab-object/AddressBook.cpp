@@ -38,27 +38,28 @@ void AddressBook::logUserOut()
 
 void AddressBook::addContact()
 {
-	if (userManager.isUserLoggedIn())
-		contactManager->addNewContact();
+	contactManager->addNewContact();
 }
 
 
 void AddressBook::printAllContacts()
 {
-	if (userManager.isUserLoggedIn())
-		contactManager->printAllContacts();
+	contactManager->printAllContacts();
 }
 
 void AddressBook::findContactsByFirstName()
 {
-	if (userManager.isUserLoggedIn())
-		contactManager->findContactsByFirstName();
+	contactManager->findContactsByFirstName();
 }
 
 void AddressBook::findContactsByLastName()
 {
-	if (userManager.isUserLoggedIn())
-		contactManager->findContactsByLastName();
+	contactManager->findContactsByLastName();
+}
+
+void AddressBook::editContact()
+{
+	contactManager->editContact();
 }
 
 AddressBook::~AddressBook()

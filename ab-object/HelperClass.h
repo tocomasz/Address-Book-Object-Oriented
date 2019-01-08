@@ -17,6 +17,8 @@ public:
 	static string convertStringToSentenceCase(string);
 	static bool isFileEmpty(string);
 	static string getNumber(string, int);
+	static int loadInteger();
+	static char loadCharacter();
 	
 
 	~HelperClass();
