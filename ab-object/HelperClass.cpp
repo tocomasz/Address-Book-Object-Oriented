@@ -32,7 +32,7 @@ string HelperClass::loadLine()
 	return input;
 }
 
-string HelperClass::convertStringToSenteceCase(string input)
+string HelperClass::convertStringToSentenceCase(string input)
 {
 	if (!input.empty())
 	{
@@ -61,6 +61,44 @@ string HelperClass::getNumber(string text, int position)
 		position++;
 	}
 	return number;
+}
+
+int HelperClass::loadInteger()
+{
+	string input = "";
+	int number = 0;
+
+	while (true)
+	{
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		getline(cin, input);
+
+		stringstream myStream(input);
+		if (myStream >> number)
+			break;
+		cout << "To nie jest liczba. Wpisz ponownie. " << endl;
+	}
+	return number;
+}
+
+char HelperClass::loadCharacter()
+{
+	string input = "";
+	char ch = { 0 };
+
+	while (true)
+	{
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		getline(cin, input);
+
+		if (input.length() == 1)
+		{
+			ch = input[0];
+			break;
+		}
+		cout << "To nie jest pojedynczy znak. Wpisz ponownie." << endl;
+	}
+	return ch;
 }
 
 

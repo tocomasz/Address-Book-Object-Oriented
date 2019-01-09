@@ -14,9 +14,11 @@ public:
 	static string intToString(int);
 	static int stringToInt(string);
 	static string loadLine();
-	static string convertStringToSenteceCase(string);
+	static string convertStringToSentenceCase(string);
 	static bool isFileEmpty(string);
 	static string getNumber(string, int);
+	static int loadInteger();
+	static char loadCharacter();
 	
 
 	~HelperClass();

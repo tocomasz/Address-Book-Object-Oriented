@@ -8,7 +8,6 @@ UserManager::UserManager(string USERSFILENAME) : userFile(USERSFILENAME)
 	loggedUserId = 0;
 }
 
-
 int UserManager::newUserId()
 {
 	if (users.empty() == true)
@@ -37,8 +36,6 @@ void UserManager::printAllUsers()
 		cout << itr->getPassword() << endl;
 	}
 }
-
-
 
 User UserManager::provideNewUserLoginCredentials()
 {

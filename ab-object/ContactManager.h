@@ -14,11 +14,22 @@ class ContactManager
 	int loggedUserId;
 	int lastContactId;
 
+	void printContact(Contact contact);
+	void printNumberOfContactsFound(int contactsCount);
+	int chooseContact();
+	char contactEditMenu();
+	void updateLastContactId();
+
+
 public:
 	ContactManager(string, int);
 	void addNewContact();
 	Contact inputNewContactData();
 	void printAllContacts();
+	void findContactsByFirstName();
+	void findContactsByLastName();
+	void editContact();
+	void deleteContact();
 	~ContactManager();
 };
 

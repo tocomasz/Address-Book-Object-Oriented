@@ -32,6 +32,7 @@ void AddressBook::changeUserPassword()
 
 void AddressBook::logUserOut()
 {
+
 	userManager.logUserOut();
 }
 
@@ -44,6 +45,26 @@ void AddressBook::addContact()
 void AddressBook::printAllContacts()
 {
 	contactManager->printAllContacts();
+}
+
+void AddressBook::findContactsByFirstName()
+{
+	contactManager->findContactsByFirstName();
+}
+
+void AddressBook::findContactsByLastName()
+{
+	contactManager->findContactsByLastName();
+}
+
+void AddressBook::editContact()
+{
+	contactManager->editContact();
+}
+
+void AddressBook::deleteContact()
+{
+	contactManager->deleteContact();
 }
 
 AddressBook::~AddressBook()

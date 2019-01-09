@@ -9,7 +9,6 @@ using namespace std;
 
 class AddressBook
 {
-	//int lastContactId;
 	const string CONTACTS_FILE_NAME;
 	UserManager userManager;
 	ContactManager *contactManager;
@@ -21,8 +20,11 @@ public:
 	void changeUserPassword();
 	void logUserOut();
 	void addContact();
-	void loadContacts();
 	void printAllContacts();
+	void findContactsByFirstName();
+	void findContactsByLastName();
+	void editContact();
+	void deleteContact();
 	~AddressBook();
 };
 
