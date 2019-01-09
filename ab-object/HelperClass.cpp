@@ -70,7 +70,7 @@ int HelperClass::loadInteger()
 
 	while (true)
 	{
-		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 		getline(cin, input);
 
 		stringstream myStream(input);
@@ -85,10 +85,10 @@ char HelperClass::loadCharacter()
 {
 	string input = "";
 	char ch = { 0 };
-
+	//cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	while (true)
 	{
-		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 		getline(cin, input);
 
 		if (input.length() == 1)
@@ -99,6 +99,14 @@ char HelperClass::loadCharacter()
 		cout << "To nie jest pojedynczy znak. Wpisz ponownie." << endl;
 	}
 	return ch;
+}
+
+void HelperClass::pauseProgram()
+{
+	string temp;
+	cout << "Nacisnij enter aby kontynuowac..";
+	getline(cin, temp);
+	return;
 }
 
 

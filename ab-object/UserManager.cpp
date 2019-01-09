@@ -42,17 +42,17 @@ User UserManager::provideNewUserLoginCredentials()
 	User user;
 	user.setId(newUserId());
 
-	string login;
+	string login = "";
 	do
 	{
 		cout << "Podaj login: ";
-		cin >> login;
+		getline(cin, login);
 		user.setLogin(login);
 	} while (isLoginTaken(user.getLogin()) == true);
 
 	cout << "Podaj haslo: ";
-	string password;
-	cin >> password;
+	string password = "";
+	getline(cin, password);
 	user.setPassword(password);
 
 	return user;
@@ -65,14 +65,14 @@ void UserManager::registerUser()
 	userFile.saveUserToFile(user);
 
 	cout << endl << "Konto zalozono pomyslnie" << endl << endl;
-	system("pause");
+	HelperClass::pauseProgram();
 }
 void UserManager::logUserIn()
 {
 	string login = "", password = "";
 
 	cout << endl << "Podaj login: ";
-	cin >> login;
+	getline(cin, login);
 
 	vector <User>::iterator itr = users.begin(), end = users.end();
 	while (itr != end)
@@ -82,20 +82,20 @@ void UserManager::logUserIn()
 			for (int iloscProb = 3; iloscProb > 0; iloscProb--)
 			{
 				cout << "Podaj haslo. Pozostalo prob: " << iloscProb << ": ";
-				cin >> password;
+				getline(cin, password);
 
 				if (itr->getPassword() == password)
 				{
 					cout << endl << "Zalogowales sie." << endl << endl;
 					loggedUserId = itr->getId();
-					system("pause");
+					HelperClass::pauseProgram();
 					return;
 
 				}
 			}
 			cout << "Wprowadzono 3 razy bledne haslo." << endl;
 			loggedUserId = 0;
-			system("pause");
+			HelperClass::pauseProgram();
 			return;
 
 		}
@@ -103,7 +103,7 @@ void UserManager::logUserIn()
 	}
 	cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
 	loggedUserId = 0;
-	system("pause");
+	HelperClass::pauseProgram();
 
 }
 
@@ -113,7 +113,7 @@ void UserManager::changeUserPassword()
 		return;
 	string newPassword = "";
 	cout << "Podaj nowe haslo: ";
-	cin >> newPassword;
+	getline(cin, newPassword);
 
 	for (vector <User>::iterator itr = users.begin(), end = users.end(); itr != end; itr++)
 	{
@@ -122,7 +122,7 @@ void UserManager::changeUserPassword()
 			itr->setPassword(newPassword);
 			cout << "Haslo zostalo zmienione." << endl << endl;
 			userFile.updateUserInFile(*itr);
-			system("pause");
+			HelperClass::pauseProgram();
 		}
 	}
 
@@ -131,6 +131,7 @@ void UserManager::changeUserPassword()
 void UserManager::logUserOut()
 {
 	loggedUserId = 0;
+	cout << "Nastapilo wylogowanie uzytkownika" << endl;
 }
 
 int UserManager::getLoggedUserId()

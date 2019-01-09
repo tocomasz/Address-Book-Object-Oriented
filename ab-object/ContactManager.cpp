@@ -124,7 +124,7 @@ void ContactManager::printAllContacts()
 	{
 		cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
 	}
-	system("pause");
+	HelperClass::pauseProgram();
 
 }
 
@@ -157,7 +157,7 @@ void ContactManager::findContactsByFirstName()
 		cout << endl << "Ksiazka adresowa jest pusta" << endl << endl;
 	}
 	cout << endl;
-	system("pause");
+	HelperClass::pauseProgram();
 }
 
 void ContactManager::findContactsByLastName()
@@ -189,7 +189,7 @@ void ContactManager::findContactsByLastName()
 		cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
 	}
 	cout << endl;
-	system("pause");
+	HelperClass::pauseProgram();
 }
 
 void ContactManager::editContact()
@@ -253,7 +253,7 @@ void ContactManager::editContact()
 	{
 		cout << endl << "Nie ma takiego adresata." << endl << endl;
 	}
-	system("pause");
+	HelperClass::pauseProgram();
 }
 
 void ContactManager::deleteContact()
@@ -282,13 +282,13 @@ void ContactManager::deleteContact()
 				contacts.erase(itr);
 			
 				cout << endl << endl << "Szukany adresat zostal USUNIETY" << endl << endl;
-				system("pause");
+				HelperClass::pauseProgram();
 				return;
 			}
 			else
 			{
 				cout << endl << endl << "Wybrany adresat NIE zostal usuniety" << endl << endl;
-				system("pause");
+				HelperClass::pauseProgram();
 				return;
 			}
 		}
@@ -296,7 +296,7 @@ void ContactManager::deleteContact()
 	if (isContact == false)
 	{
 		cout << endl << "Nie ma takiego adresata w ksiazce adresowej" << endl << endl;
-		system("pause");
+		HelperClass::pauseProgram();
 	}
 	return;
 }
