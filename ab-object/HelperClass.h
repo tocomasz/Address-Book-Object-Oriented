@@ -19,7 +19,7 @@ public:
 	static string getNumber(string, int);
 	static int loadInteger();
 	static char loadCharacter();
-	
+	static void pauseProgram();
 
 	~HelperClass();
 };

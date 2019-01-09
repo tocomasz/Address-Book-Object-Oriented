@@ -31,7 +31,7 @@ void ContactFile::addContactToFile(Contact contact)
 	{
 		cout << "Nie udalo sie otworzyc pliku i zapisac w nim danych." << endl;
 	}
-	system("pause");
+	HelperClass::pauseProgram();
 }
 
 string ContactFile::separateContactDataWithLineSeparators(Contact contact)
@@ -86,14 +86,19 @@ void ContactFile::updateContactInFile(Contact contact)
 	if (textFile.good() && temp.good())
 	{
 		string loadedLine = "";
+		bool isFirstLine = true;
 		while (getline(textFile, loadedLine))
 		{
+			if (!isFirstLine)
+				temp << endl;
 			if (getContactIdFromString(loadedLine) == contact.getId())
 			{
-				temp <<endl << contactNewData;
+				temp << contactNewData;
+				isFirstLine = false;
 				continue;
 			}
-			temp << endl << loadedLine;
+			temp << loadedLine;
+			isFirstLine = false;
 		}
 	}
 	textFile.close();
@@ -112,11 +117,15 @@ void ContactFile::deleteContactFromFile(Contact contact)
 	if (textFile.good() && temp.good())
 	{
 		string loadedLine = "";
+		bool isFirstLine = true;
 		while (getline(textFile, loadedLine))
 		{
 			if (getContactIdFromString(loadedLine) == contact.getId())
 				continue;
+			if (!isFirstLine)
+				temp << endl;
 			temp << loadedLine;
+			isFirstLine = false;
 		}
 	}
 	textFile.close();
