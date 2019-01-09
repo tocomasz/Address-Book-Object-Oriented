@@ -1,6 +1,11 @@
 
 #include "ContactFile.h"
 
+ContactFile::ContactFile(string CONTACTFILENAME)
+	: contactsFileName(CONTACTFILENAME), temporaryContactsFileName("temporaryContactsFile.txt")
+{
+
+}
 
 void ContactFile::addContactToFile(Contact contact)
 {
@@ -44,7 +49,7 @@ string ContactFile::separateContactDataWithLineSeparators(Contact contact)
 	return line;
 
 }
-vector<Contact> ContactFile::loadLoggedUserContactsFromFile(int loggedUserId, int &lastContactId)
+vector<Contact> ContactFile::loadLoggedUserContactsFromFile(int loggedUserId)
 {
 	vector <Contact> contacts;
 	Contact contact;
@@ -69,10 +74,6 @@ vector<Contact> ContactFile::loadLoggedUserContactsFromFile(int loggedUserId, in
 	else
 		cout << "Nie udalo sie otworzyc pliku i wczytac danych." << endl;
 
-	if (lastContactData != "")
-	{
-		lastContactId = getContactIdFromString(lastContactData);
-	}
 	return contacts;
 }
 
@@ -81,18 +82,18 @@ void ContactFile::updateContactInFile(Contact contact)
 	string contactNewData = separateContactDataWithLineSeparators(contact);
 	fstream textFile, temp;
 	textFile.open(contactsFileName.c_str(), ios::in);
-	temp.open("temporaryContactsFile.txt", ios::out);
+	temp.open(temporaryContactsFileName.c_str(), ios::out);
 	if (textFile.good() && temp.good())
 	{
 		string loadedLine = "";
 		while (getline(textFile, loadedLine))
 		{
-			if (loadedLine[0] - '0' == contact.getId())
+			if (getContactIdFromString(loadedLine) == contact.getId())
 			{
-				temp << contactNewData << endl;
+				temp <<endl << contactNewData;
 				continue;
 			}
-			temp << loadedLine << endl;
+			temp << endl << loadedLine;
 		}
 	}
 	textFile.close();
@@ -100,7 +101,58 @@ void ContactFile::updateContactInFile(Contact contact)
 	temp.close();
 	temp.clear();
 	remove(contactsFileName.c_str());
-	rename("temporaryContactsFile.txt", contactsFileName.c_str());
+	rename(temporaryContactsFileName.c_str(), contactsFileName.c_str());
+}
+
+void ContactFile::deleteContactFromFile(Contact contact)
+{
+	fstream textFile, temp;
+	textFile.open(contactsFileName.c_str(), ios::in);
+	temp.open(temporaryContactsFileName.c_str(), ios::out);
+	if (textFile.good() && temp.good())
+	{
+		string loadedLine = "";
+		while (getline(textFile, loadedLine))
+		{
+			if (getContactIdFromString(loadedLine) == contact.getId())
+				continue;
+			temp << loadedLine;
+		}
+	}
+	textFile.close();
+	textFile.clear();
+	temp.close();
+	temp.clear();
+	remove(contactsFileName.c_str());
+	rename(temporaryContactsFileName.c_str(), contactsFileName.c_str());
+}
+
+int ContactFile::getLastContactIdFromFile()
+{
+	fstream textFile, temp;
+	textFile.open(contactsFileName.c_str(), ios::in);
+	if (!textFile.good())
+		return 0;
+	else
+	{
+		textFile.seekg(-3, ios_base::end);
+		if ((int)textFile.tellg() <= 1)
+			return 0;
+		else
+		{
+			while (1)
+			{
+				char ch;
+				textFile.get(ch);
+				if (ch == '\n')
+					break;
+				textFile.seekg(-2, ios_base::cur);
+			}
+			string lastLine = "";
+			getline(textFile, lastLine);
+			return getContactIdFromString(lastLine);
+		}
+	}
 }
 
 int ContactFile::getUserIdFromString(string line)
@@ -113,9 +165,9 @@ int ContactFile::getUserIdFromString(string line)
 
 int ContactFile::getContactIdFromString(string line)
 {
-	int pozycjaRozpoczeciaIdAdresata = 0;
-	int idAdresata = HelperClass::stringToInt(HelperClass::getNumber(line, pozycjaRozpoczeciaIdAdresata));
-	return idAdresata;
+	int contactIdPosition = 0;
+	int contactId = HelperClass::stringToInt(HelperClass::getNumber(line, contactIdPosition));
+	return contactId;
 }
 
 Contact ContactFile::divideLineWithSeparatorsIntoContactData(string singleContactDataWithSeparators)

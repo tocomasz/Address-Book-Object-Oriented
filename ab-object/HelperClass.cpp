@@ -70,7 +70,7 @@ int HelperClass::loadInteger()
 
 	while (true)
 	{
-		cin.ignore();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		getline(cin, input);
 
 		stringstream myStream(input);
@@ -88,6 +88,7 @@ char HelperClass::loadCharacter()
 
 	while (true)
 	{
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		getline(cin, input);
 
 		if (input.length() == 1)

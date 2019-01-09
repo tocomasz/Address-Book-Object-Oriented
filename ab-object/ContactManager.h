@@ -16,8 +16,9 @@ class ContactManager
 
 	void printContact(Contact contact);
 	void printNumberOfContactsFound(int contactsCount);
-	int chooseContactToEdit();
+	int chooseContact();
 	char contactEditMenu();
+	void updateLastContactId();
 
 
 public:
@@ -28,6 +29,7 @@ public:
 	void findContactsByFirstName();
 	void findContactsByLastName();
 	void editContact();
+	void deleteContact();
 	~ContactManager();
 };
 

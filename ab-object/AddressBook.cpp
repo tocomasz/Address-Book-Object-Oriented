@@ -62,6 +62,11 @@ void AddressBook::editContact()
 	contactManager->editContact();
 }
 
+void AddressBook::deleteContact()
+{
+	contactManager->deleteContact();
+}
+
 AddressBook::~AddressBook()
 {
 	delete contactManager;

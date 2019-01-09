@@ -8,16 +8,19 @@
 class ContactFile
 {
 	const string contactsFileName;
+	const string temporaryContactsFileName;
 	string separateContactDataWithLineSeparators(Contact);
 	int getUserIdFromString(string);
 	int getContactIdFromString(string);
 
 	Contact divideLineWithSeparatorsIntoContactData(string);
 public:
-	ContactFile(string CONTACTFILENAME) : contactsFileName(CONTACTFILENAME) {};
+	ContactFile(string);
 	void addContactToFile(Contact);
-	vector <Contact> loadLoggedUserContactsFromFile(int, int&);
+	vector <Contact> loadLoggedUserContactsFromFile(int);
 	void updateContactInFile(Contact);
+	void deleteContactFromFile(Contact);
+	int getLastContactIdFromFile();
 	~ContactFile();
 };
 

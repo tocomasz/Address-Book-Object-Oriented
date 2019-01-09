@@ -9,7 +9,8 @@ ContactManager::ContactManager(string CONTACTSFILENAME, int LOGGEDUSERID)
 	: contactFile(CONTACTSFILENAME), loggedUserId(LOGGEDUSERID)
 {
 	lastContactId = 0;
-	contacts = contactFile.loadLoggedUserContactsFromFile(loggedUserId, lastContactId);
+	contacts = contactFile.loadLoggedUserContactsFromFile(loggedUserId);
+	updateLastContactId();
 }
 
 void ContactManager::printContact(Contact contact)
@@ -30,7 +31,7 @@ void ContactManager::printNumberOfContactsFound(int contactsCount)
 		cout << endl << "Ilosc adresatow w ksiazce adresowej wynosi: " << contactsCount << endl << endl;
 }
 
-int ContactManager::chooseContactToEdit()
+int ContactManager::chooseContact()
 {
 	int chosenContact = 0;
 	cout << "Podaj numer ID Adresata: ";
@@ -55,6 +56,11 @@ char ContactManager::contactEditMenu()
 	choice = HelperClass::loadCharacter();
 
 	return choice;
+}
+
+void ContactManager::updateLastContactId()
+{
+	lastContactId = contactFile.getLastContactIdFromFile();
 }
 
 
@@ -195,7 +201,7 @@ void ContactManager::editContact()
 	string contactData = "";
 
 	cout << ">>> EDYCJA WYBRANEGO ADRESATA <<<" << endl << endl;
-	contactId = chooseContactToEdit();
+	contactId = chooseContact();
 
 	char choice;
 	bool isContact = false;
@@ -248,6 +254,51 @@ void ContactManager::editContact()
 		cout << endl << "Nie ma takiego adresata." << endl << endl;
 	}
 	system("pause");
+}
+
+void ContactManager::deleteContact()
+{
+	int idToDelete = 0;
+	int numerLiniiUsuwanegoAdresata = 0;
+
+	system("cls");
+	cout << ">>> USUWANIE WYBRANEGO ADRESATA <<<" << endl << endl;
+	idToDelete = chooseContact();
+
+	char ch;
+	bool isContact = false;
+
+	for (vector <Contact>::iterator itr = contacts.begin(), end = contacts.end(); itr != end; itr++)
+	{
+		if (itr->getId() == idToDelete)
+		{
+			isContact = true;
+			cout << endl << "Potwierdz naciskajac klawisz 't': ";
+			ch = HelperClass::loadCharacter();
+			if (ch == 't')
+			{
+				contactFile.deleteContactFromFile(*itr);
+				updateLastContactId();
+				contacts.erase(itr);
+			
+				cout << endl << endl << "Szukany adresat zostal USUNIETY" << endl << endl;
+				system("pause");
+				return;
+			}
+			else
+			{
+				cout << endl << endl << "Wybrany adresat NIE zostal usuniety" << endl << endl;
+				system("pause");
+				return;
+			}
+		}
+	}
+	if (isContact == false)
+	{
+		cout << endl << "Nie ma takiego adresata w ksiazce adresowej" << endl << endl;
+		system("pause");
+	}
+	return;
 }
 
 
