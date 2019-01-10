@@ -144,18 +144,21 @@ int ContactFile::getLastContactIdFromFile()
 		return 0;
 	else
 	{
-		textFile.seekg(-3, ios_base::end);
+		textFile.seekg(-1, ios_base::end);
 		if ((int)textFile.tellg() <= 1)
 			return 0;
 		else
 		{
 			while (1)
 			{
-				char ch;
-				textFile.get(ch);
-				if (ch == '\n')
+				if (textFile.peek() == '\n')
+				{
+					textFile.seekg(2, ios_base::cur);
 					break;
-				textFile.seekg(-2, ios_base::cur);
+				}
+				else if ((int)textFile.tellg() == 0)
+					break;
+				textFile.seekg(-1, ios_base::cur);
 			}
 			string lastLine = "";
 			getline(textFile, lastLine);

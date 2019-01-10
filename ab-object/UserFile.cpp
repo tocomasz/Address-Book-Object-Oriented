@@ -99,17 +99,22 @@ void UserFile::updateUserInFile(User user)
 	temp.open("temp.txt", ios::out);
 	if (textFile.good() && temp.good())
 	{
-		string loadedLine;
+		bool isFirstLine = true;
+		string loadedLine = "";
 		while (getline(textFile, loadedLine))
 		{
+			if (!isFirstLine)
+				temp << endl;
 			if (loadedLine[0] - '0' == user.getId())
 			{
 				temp << user.getId() << "|";
 				temp << user.getLogin() << "|";
-				temp << user.getPassword() << "|" << endl;
+				temp << user.getPassword() << "|";
+				isFirstLine = false;
 				continue;
 			}
-			temp << loadedLine << endl;
+			temp << loadedLine;
+			isFirstLine = false;
 		}
 	}
 	textFile.close();

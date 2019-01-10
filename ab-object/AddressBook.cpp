@@ -67,6 +67,11 @@ void AddressBook::deleteContact()
 	contactManager->deleteContact();
 }
 
+int AddressBook::getLoggedUserId()
+{
+	return userManager.getLoggedUserId();
+}
+
 AddressBook::~AddressBook()
 {
 	delete contactManager;

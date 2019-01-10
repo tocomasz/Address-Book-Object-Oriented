@@ -25,6 +25,7 @@ public:
 	void findContactsByLastName();
 	void editContact();
 	void deleteContact();
+	int getLoggedUserId();
 	~AddressBook();
 };
 
