@@ -16,7 +16,7 @@ class UserFile
 public:
 	UserFile(string USERFILENAME) : usersFileName(USERFILENAME) {};
 	void saveUserToFile(User);
-	vector <User> loadUsersFromFile();;
+	vector <User> loadUsersFromFile();
 	void updateUserInFile(User);
 
 	~UserFile();

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>410</y>
-      <w>240</w>
-      <h>200</h>
+      <x>693</x>
+      <y>336</y>
+      <w>189</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>HelperClass
 --
@@ -16,33 +16,37 @@
 + loadLine(): String
 + convertStringToSentenceCase(): String
 + isFileEmpty(): Bool
-+ getNumber(): String</panel_attributes>
++ getNumber(): String
++ loadInteger(): Integer
++ loadCharacter(): Character
++ pauseProgram(): Void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>100</y>
-      <w>290</w>
-      <h>280</h>
+      <x>693</x>
+      <y>63</y>
+      <w>196</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>AddressBook
 --
-- userManager: UserManager
-- contactManager: ContactManager
-- loggedUserId: Integer
-- lastContactId: Integer
+- CONTACTS_FILE_NAME: String
 --
++ AddressBook()
 + registerUser(): Void
 + printAllUsers(): Void
 + logUserIn(): Void
 + changeUserPassword(): Void
 + logUserOut(): Void
 + addContact(): Void
-+ loadContacts(): Void
 + printAllContacts(): Void
-
++ findContactsByFirstName(): Void
++ findContactsByLastName(): Void
++ editContact(): Void
++ deleteContact(): Void
++ getLoggedUserId(): Integer
 
 
 
@@ -52,10 +56,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1100</x>
-      <y>90</y>
-      <w>240</w>
-      <h>200</h>
+      <x>231</x>
+      <y>546</y>
+      <w>112</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -67,21 +71,31 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>410</y>
-      <w>300</w>
-      <h>280</h>
+      <x>952</x>
+      <y>336</y>
+      <w>196</w>
+      <h>217</h>
     </coordinates>
     <panel_attributes>ContactManager
 --
 - contacts: vector&lt;Contact&gt;
 - contactFile: ContactFile
+- loggedUserId: Integer
+- lastContactId: Integer
 --
 + ContactManager()
+- printContact(): Void
+- printNumberOfContactsFound(): Void
+- chooseContact(): Integer
+- contactEditMenu(): Character
+- updateLastContactId(): Void
 + addNewContact(): Integer
 + inputNewContactData(): Contact
-+ loadLoggedUserContacts(): Void
 + printAllContacts(): Void
++ findContactsByFirstName(): Void
++ findContactsByLastName(): Void
++ editContact(): Void
++ deleteContact(): Void
 
 </panel_attributes>
     <additional_attributes/>
@@ -89,22 +103,26 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>410</y>
-      <w>260</w>
-      <h>280</h>
+      <x>917</x>
+      <y>609</y>
+      <w>252</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>ContactFile
 --
 - contactsFileName: String
+- temporaryContactsFileName: String
 --
++ ContactFile()
 - separateContactDataWithLineSeparators(): String
 - getUserIdFromString(): Integer
-- getContactIdFromString: Integer
+- getContactIdFromString(): Integer
 - divideLineWithSeparatorsIntoContactData(): Contact
-+ ContactFile()
 + addContactToFile(): Void
 + loadLoggedUserContactsFromFile(): Vector&lt;Contact&gt;
++ updateContactInFile(): Void
++ deleteContactFromFile(): Void
++ getLastContactIdFromFile(): Integer
 
 </panel_attributes>
     <additional_attributes/>
@@ -112,10 +130,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1100</x>
-      <y>390</y>
-      <w>240</w>
-      <h>200</h>
+      <x>1232</x>
+      <y>518</y>
+      <w>126</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>Contact
 --
@@ -131,48 +149,171 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>110</y>
-      <w>300</w>
-      <h>280</h>
+      <x>413</x>
+      <y>343</y>
+      <w>196</w>
+      <h>196</h>
     </coordinates>
     <panel_attributes>UserManager
 --
 
 - users: vector&lt;User&gt;
-- userFile: UserFile
+- loggedUserId: Integer
 --
++ UserManager()
 - newUserId(): Integer
 - isLoginTaken(): Bool
 - provideNewUserLoginCredentials(): User
-+ UserManager()
 + registerUser(): Void
 + printAllUsers(): Void
 + logUserIn(): Integer
 + changeUserPassword(): Void
 + logUserOut(): Integer
++ getLoggedUserId(): Integer
++ isUserLoggedIn(): Bool
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>110</y>
-      <w>260</w>
-      <h>280</h>
+      <x>406</x>
+      <y>602</y>
+      <w>210</w>
+      <h>119</h>
     </coordinates>
     <panel_attributes>UserFile
 --
 - usersFileName: String
 --
++ UserFile()
 - addSeparatingLinesToUserData(): String
 - divideLineWithSeparatorsIntoUserData: User
-+ UserFile()
 + saveUserToFile(): Void
 + loadUsersFromFile(): Vector&lt;User&gt;
 + updateUserInFile(): Void
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>868</x>
+      <y>266</y>
+      <w>112</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;140.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>588</x>
+      <y>266</y>
+      <w>133</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>170.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>609</x>
+      <y>469</y>
+      <w>182</w>
+      <h>196</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>240.0;10.0;10.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>469</y>
+      <w>196</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>260.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>469</y>
+      <w>161</w>
+      <h>238</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;210.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>322</x>
+      <y>441</y>
+      <w>105</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>322</x>
+      <y>602</y>
+      <w>98</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1141</x>
+      <y>448</y>
+      <w>105</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1162</x>
+      <y>595</y>
+      <w>84</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;150.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>455</x>
+      <y>532</y>
+      <w>21</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1078</x>
+      <y>546</y>
+      <w>21</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
 </diagram>
